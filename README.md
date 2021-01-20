@@ -11,3 +11,4 @@ Converts Trading 212 CSV files to different formats such Yahoo Finance CSV
 # Usage
 Just run `python3 main.py`
 
+**Star the repo to show support**
