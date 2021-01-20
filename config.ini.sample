@@ -1,0 +1,6 @@
+[Trading212]
+# Path to a folder with a list of CSVs or a singe CSV
+InputPath=input/
+
+[YahooFinance]
+OutputPath=output/yahoo-finance.csv
