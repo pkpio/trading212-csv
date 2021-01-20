@@ -2,9 +2,10 @@
 Converts Trading 212 CSV files to different formats such Yahoo Finance CSV
 
 # Setup
-- Copy config.ini.sample to config.ini
-- Export CSV files from Trading212 app and put them in `input` folder
-  - You can export as multiple files
+- Copy `config.ini.sample` to `config.ini`
+- Export CSV files from Trading212 app 
+  - Download them to `input` folder
+  - You can export and download multiple files
   - Overlapping dates are okay
 
 # Usage
