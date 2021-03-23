@@ -1,13 +1,11 @@
-from configparser import ConfigParser
 import os
 import glob
 import csv
 
 class Trading212Importer():
 
-    def __init__(self):
-        self.config = ConfigParser()
-        self.config.read("config.ini")
+    def __init__(self, config):
+        self.config = config
 
     def read_csv(self):
         print("Reading transactions from CSV...")

@@ -1,10 +1,15 @@
+from configparser import ConfigParser
 from trading212 import Trading212Importer
 from yahoo_finance import YahooFinanceExporter
 
-importer = Trading212Importer()
+
+config = ConfigParser()
+config.read("config.ini")
+
+importer = Trading212Importer(config)
 transactions = importer.read_csv()
 
-exporter = YahooFinanceExporter()
+exporter = YahooFinanceExporter(config)
 exporter.write_csv(transactions)
 
 print("")

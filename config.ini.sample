@@ -4,3 +4,12 @@ InputPath=input/
 
 [YahooFinance]
 OutputPath=output/yahoo-finance.csv
+
+[YahooFinanceTickerMap]
+# Trading 212 and Yahoo Finance doesn't use the same 
+# tickers. Some need a manual mapping - especially for 
+# European equities. The format is
+# Trading212Ticker=YahooFinanceTicker
+BTCE=DE000A27Z304.SG
+WDI=WDI.DE
+ECAR=ECAR.L

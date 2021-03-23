@@ -3,18 +3,12 @@ import csv
 from datetime import datetime
 
 class YahooFinanceExporter():
-    SymbolMap = {
-        "BTCE": "DE000A27Z304.SG",
-        "WDI": "WDI.DE",
-        "ECAR": "ECAR.L"
-    }
 
-    def __init__(self):
-        self.config = ConfigParser()
-        self.config.read("config.ini")
+    def __init__(self, config):
+        self.config = config
 
     def write_csv(self, transactions):
-        print("Writing transactions to CSV...")
+        print("\nWriting transactions to CSV...")
         outputpath = self.config['YahooFinance']['OutputPath']
 
         with open(outputpath, 'w', newline='') as csvfile:
@@ -39,6 +33,7 @@ class YahooFinanceExporter():
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
 
+            symbolErrors = False
             for key, transaction in transactions.items():
 
                 action = transaction["Action"]
@@ -57,8 +52,8 @@ class YahooFinanceExporter():
                     # These aren't supported by Yahoo Finance import format
                     continue
 
-                if symbol in self.SymbolMap:
-                    symbol = self.SymbolMap[symbol]
+                if symbol in self.config['YahooFinanceTickerMap']:
+                    symbol = self.config['YahooFinanceTickerMap'][symbol]
                 elif currency == "GBX":
                     # UK stocks are typically mapped with .L at end
                     symbol = symbol + ".L"
@@ -66,7 +61,8 @@ class YahooFinanceExporter():
                     # Dollar stocks typically don't need any extra work
                     pass
                 else:
-                    print("Unknown symbol {}".format(symbol))
+                    print("\t{} needs manual mapping!".format(symbol))
+                    symbolErrors = True
 
                 writer.writerow({
                     "Symbol": symbol,
@@ -77,3 +73,7 @@ class YahooFinanceExporter():
                     "Quantity": quantity
                 })
             print("\tWritten to: {}".format(outputpath))
+
+            if symbolErrors:
+                print("\n\nNote: Couldn't find a proper mapping for some tickers!")
+                print("\nTo fix this, find the Yahoo Finance tickers for these equities and add them in the config.ini file. There are some examples in there to help you.")
