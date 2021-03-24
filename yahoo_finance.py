@@ -54,7 +54,7 @@ class YahooFinanceExporter():
 
                 if symbol in self.config['YahooFinanceTickerMap']:
                     symbol = self.config['YahooFinanceTickerMap'][symbol]
-                elif currency == "GBX":
+                elif currency == "GBX" or currency == "GBP":
                     # UK stocks are typically mapped with .L at end
                     symbol = symbol + ".L"
                 elif currency == "USD":
