@@ -45,7 +45,7 @@ class YahooFinanceExporter():
 
                 if action in ["Market buy", "Limit buy", "Stop limit buy"]:
                     quantity = float(quantity)
-                elif action in ["Market sell", "Limit sell", "Stop limit sell"]:
+                elif action in ["Market sell", "Limit sell", "Stop limit sell", "Stop sell"]:
                     quantity = -float(quantity)
                 else:
                     # Probably one of dividend, deposit or withdraw

@@ -1,6 +1,7 @@
 from configparser import ConfigParser
 from trading212 import Trading212Importer
 from yahoo_finance import YahooFinanceExporter
+from wallmine import WallmineExporter
 
 
 config = ConfigParser()
@@ -11,6 +12,9 @@ transactions = importer.read_csv()
 
 exporter = YahooFinanceExporter(config)
 exporter.write_csv(transactions)
+
+wallmineExporter = WallmineExporter(config)
+wallmineExporter.write_csv(transactions)
 
 print("")
 print("----------------------------------------------------------")
